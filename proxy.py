@@ -26,6 +26,10 @@ def call_rpc(method, params=None):
 
 @app.route('/<method>', methods=['GET', 'POST'])
 def rpc_method(method):
+    allowed_methods = ['getblockchaininfo', 'getrawtransaction']
+    if method not in allowed_methods:
+        return jsonify({"error": "Method not allowed"}), 403
+
     params = request.json.get('params', []) if request.is_json else []
     result = call_rpc(method, params)
     return jsonify(result)
