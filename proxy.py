@@ -24,14 +24,14 @@ def call_rpc(method, params=None):
     )
     return response.json()
 
-@app.route('/<method>', methods=['GET', 'POST'])
-def rpc_method(method):
-    allowed_methods = ['getblockchaininfo', 'getrawtransaction']
-    if method not in allowed_methods:
-        return jsonify({"error": "Method not allowed"}), 403
+@app.route('/getblockchaininfo', methods=['GET'])
+def get_blockchain_info():
+    result = call_rpc("getblockchaininfo")
+    return jsonify(result)
 
-    params = request.json.get('params', []) if request.is_json else []
-    result = call_rpc(method, params)
+@app.route('/getrawtransaction/<txid>', methods=['GET'])
+def get_raw_transaction(txid):
+    result = call_rpc("getrawtransaction", [txid, True])
     return jsonify(result)
 
 if __name__ == '__main__':
