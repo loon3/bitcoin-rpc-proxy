@@ -10,7 +10,7 @@ BITCOIND_RPC_URL = "http://counterparty-core-bitcoind-1:8332"
 RPC_USER = "rpc"
 RPC_PASSWORD = "rpc"
 
-ADDRINDEX_RPC_URL = "http://counterparty-core-addrindex-1:8432"
+ADDRINDEX_RPC_URL = "http://counterparty-core-addrindexrs-1:8432"
 
 def call_rpc(method, params=None):
     headers = {'content-type': 'application/json'}
