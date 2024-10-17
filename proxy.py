@@ -34,5 +34,10 @@ def get_raw_transaction(txid):
     result = call_rpc("getrawtransaction", [txid, True])
     return jsonify(result)
 
+@app.route('/estimatesmartfee', methods=['GET'])
+def estimate_smart_fee():
+    result = call_rpc("estimatesmartfee", [1, "conservative"])
+    return jsonify(result)
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
